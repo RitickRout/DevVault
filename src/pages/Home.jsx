@@ -8,7 +8,9 @@ import {
   GlobeAltIcon,
   CommandLineIcon,
   SwatchIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  SparklesIcon,
+  ArrowRightIcon
 } from '@heroicons/react/24/outline'
 import SEO from '../components/SEO'
 
@@ -62,12 +64,19 @@ const tools = [
     description: 'Color palette extraction and conversion',
     color: 'bg-pink-500'
   },
-  { 
-    name: 'Markee', 
-    href: '/markee', 
-    icon: DocumentTextIcon, 
+  {
+    name: 'Markee',
+    href: '/markee',
+    icon: DocumentTextIcon,
     description: 'Live Markdown editor and previewer',
     color: 'bg-indigo-500'
+  },
+  {
+    name: 'QueryForge',
+    href: '/queryforge',
+    icon: SparklesIcon,
+    description: 'AI-powered SQL query generator using Gemini',
+    color: 'bg-purple-500'
   },
 ]
 
@@ -93,7 +102,8 @@ const Home = () => {
       "API Request Builder",
       "Git Commands Cheatsheet",
       "Color Palette Extractor",
-      "Markdown Editor"
+      "Markdown Editor",
+      "AI-powered SQL Query Generator"
     ]
   }
 

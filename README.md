@@ -17,6 +17,7 @@ A comprehensive, free online developer toolkit with 8 essential tools for develo
 - **GitWizard** - Comprehensive Git commands cheatsheet with search functionality
 - **Colorly** - Color palette extractor from images with format conversion
 - **Markee** - Live Markdown editor with GitHub Flavored Markdown support
+- **QueryForge** - AI-powered SQL query generator using Gemini API
 
 ### 🎨 User Experience
 - **Responsive Design** - Mobile-first design that works on all devices
@@ -43,6 +44,7 @@ A comprehensive, free online developer toolkit with 8 essential tools for develo
 - **Icons**: Heroicons
 - **SEO**: React Helmet Async
 - **Utilities**: Crypto-JS, Marked, Axios
+- **AI Integration**: Google Generative AI (Gemini)
 
 ## 🚀 Quick Start
 

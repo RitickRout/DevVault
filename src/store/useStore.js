@@ -47,6 +47,18 @@ const useStore = create((set, get) => ({
     markee: {
       markdown: '# Welcome to Markee\n\nStart writing your markdown here...',
       preview: ''
+    },
+    queryforge: {
+      userRequest: '',
+      schema: '',
+      dbType: 'MySQL',
+      generatedQuery: '',
+      explanation: '',
+      optimizedQuery: '',
+      apiKey: '',
+      isLoading: false,
+      error: null,
+      history: []
     }
   },
   

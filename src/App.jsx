@@ -17,6 +17,7 @@ const APIBox = lazy(() => import('./pages/APIBox'))
 const GitWizard = lazy(() => import('./pages/GitWizard'))
 const Colorly = lazy(() => import('./pages/Colorly'))
 const Markee = lazy(() => import('./pages/Markee'))
+const QueryForge = lazy(() => import('./pages/QueryForge'))
 
 // Loading component
 const LoadingSpinner = () => (
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/gitwizard" element={<GitWizard />} />
                 <Route path="/colorly" element={<Colorly />} />
                 <Route path="/markee" element={<Markee />} />
+                <Route path="/queryforge" element={<QueryForge />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Suspense>

@@ -10,6 +10,7 @@ import {
   CommandLineIcon,
   SwatchIcon,
   DocumentTextIcon,
+  SparklesIcon,
   Bars3Icon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
@@ -25,6 +26,7 @@ const tools = [
   { name: 'GitWizard', href: '/gitwizard', icon: CommandLineIcon, description: 'Git Commands' },
   { name: 'Colorly', href: '/colorly', icon: SwatchIcon, description: 'Color Tools' },
   { name: 'Markee', href: '/markee', icon: DocumentTextIcon, description: 'Markdown Editor' },
+  { name: 'QueryForge', href: '/queryforge', icon: SparklesIcon, description: 'AI SQL Generator' },
 ]
 
 const Navigation = () => {

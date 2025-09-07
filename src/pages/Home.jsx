@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { 
+import {
   CodeBracketIcon,
   MagnifyingGlassIcon,
   KeyIcon,
@@ -10,6 +10,7 @@ import {
   SwatchIcon,
   DocumentTextIcon
 } from '@heroicons/react/24/outline'
+import SEO from '../components/SEO'
 
 const tools = [
   { 
@@ -71,8 +72,41 @@ const tools = [
 ]
 
 const Home = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "DevVault",
+    "description": "Free online developer toolkit with 8 essential tools for developers",
+    "url": "https://devvault.dev",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "JSON Formatter and Validator",
+      "Regular Expression Tester",
+      "JWT Token Decoder",
+      "Hash Generator",
+      "API Request Builder",
+      "Git Commands Cheatsheet",
+      "Color Palette Extractor",
+      "Markdown Editor"
+    ]
+  }
+
   return (
-    <div className="animate-fade-in">
+    <>
+      <SEO
+        title="Free Developer Toolkit"
+        description="Free online developer toolkit with 8 essential tools: JSON formatter, Regex tester, JWT decoder, Hash generator, API tester, Git commands, Color tools, and Markdown editor. No signup required!"
+        keywords="developer tools, JSON formatter, regex tester, JWT decoder, hash generator, API tester, git commands, color tools, markdown editor, free developer toolkit"
+        canonical="/"
+        structuredData={structuredData}
+      />
+      <div className="animate-fade-in">
       <div className="text-center mb-12">
         <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
           <span className="bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent">
@@ -116,8 +150,9 @@ const Home = () => {
             </div>
           </Link>
         ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

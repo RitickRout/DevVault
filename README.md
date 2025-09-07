@@ -1,60 +1,133 @@
-# DevVault - Developer Toolkit
+# DevVault - Free Developer Toolkit
 
-A comprehensive developer toolkit built with React.js and Node.js featuring 8 essential utilities for developers.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![React](https://img.shields.io/badge/React-19.1.1-blue.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.1.4-646CFF.svg)](https://vitejs.dev/)
+
+A comprehensive, free online developer toolkit with 8 essential tools for developers. Built with modern web technologies for optimal performance and user experience.
 
 ## 🚀 Features
 
-- **JSONify** - JSON Formatter and Viewer with syntax highlighting
-- **RegexLab** - Interactive Regular Expression tester and generator  
-- **TokenPeek** - JWT Token decoder and debugger
-- **HashHub** - UUID and Hash generator for various algorithms
+### 🛠️ Developer Tools
+- **JSONify** - JSON formatter, validator, and prettifier with real-time validation
+- **RegexLab** - Interactive regex tester with live highlighting and match details
+- **TokenPeek** - JWT token decoder with header, payload, and signature parsing
+- **HashHub** - Hash generator supporting MD5, SHA1, SHA256, SHA512, SHA3, RIPEMD160, and UUID generation
 - **APIBox** - Postman-like API request builder and tester
-- **GitWizard** - Searchable Git commands cheatsheet
-- **Colorly** - Color palette extractor and converter
-- **Markee** - Live Markdown editor with real-time preview
+- **GitWizard** - Comprehensive Git commands cheatsheet with search functionality
+- **Colorly** - Color palette extractor from images with format conversion
+- **Markee** - Live Markdown editor with GitHub Flavored Markdown support
 
-## 🛠️ Tech Stack
+### 🎨 User Experience
+- **Responsive Design** - Mobile-first design that works on all devices
+- **Dark Mode** - Toggle between light and dark themes
+- **Real-time Updates** - Live validation and preview across all tools
+- **Copy to Clipboard** - One-click copy functionality throughout the app
+- **Export Capabilities** - Download functionality for generated content
+- **Offline Ready** - PWA support for offline usage
 
-### Frontend
-- **React.js 18** with Vite
-- **Tailwind CSS** for styling
-- **Zustand** for state management
-- **React Router** for routing
-- **Monaco Editor** for code editing
-- **Headless UI** for components
+### ⚡ Performance & SEO
+- **Lazy Loading** - Code splitting for optimal loading performance
+- **SEO Optimized** - Comprehensive meta tags, structured data, and sitemap
+- **PWA Ready** - Progressive Web App with offline support
+- **Fast Loading** - Optimized bundle size and efficient rendering
+- **Accessibility** - WCAG compliant with proper ARIA labels
 
-### Backend
-- **Node.js** with **Fastify**
-- **JWT** authentication
-- **Zod** validation
-- **CryptoJS** for hashing
+## 🏗️ Tech Stack
 
-## 📦 Installation
+- **Frontend**: React 19.1.1 with Hooks
+- **Build Tool**: Vite 7.1.4
+- **Styling**: Tailwind CSS with dark mode support
+- **State Management**: Zustand
+- **Routing**: React Router v6
+- **Icons**: Heroicons
+- **SEO**: React Helmet Async
+- **Utilities**: Crypto-JS, Marked, Axios
 
-### Frontend
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
 ```bash
+# Clone the repository
+git clone https://github.com/devvault/devvault.git
+cd devvault
+
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-### Backend
-```bash
-cd backend
-npm install
-npm run dev
+## 📁 Project Structure
+
 ```
+src/
+├── components/          # Reusable UI components
+│   ├── Header.jsx      # Main header with navigation
+│   ├── Navigation.jsx  # Sidebar navigation
+│   ├── SEO.jsx        # SEO meta tags component
+│   └── ...
+├── pages/              # Tool pages
+│   ├── Home.jsx       # Landing page
+│   ├── JSONify.jsx    # JSON formatter tool
+│   ├── RegexLab.jsx   # Regex tester tool
+│   └── ...
+├── store/              # State management
+│   └── useStore.js    # Zustand store
+├── utils/              # Utility functions
+│   └── jsonUtils.js   # JSON processing utilities
+└── App.jsx            # Main application component
+```
+
+## 🔧 SEO & Performance Features
+
+### SEO Optimization
+- **Meta Tags**: Comprehensive title, description, keywords, and Open Graph tags
+- **Structured Data**: JSON-LD schema for better search engine understanding
+- **Sitemap**: XML sitemap for all tool pages (`/sitemap.xml`)
+- **Robots.txt**: Search engine crawling instructions (`/robots.txt`)
+- **Canonical URLs**: Proper canonical links for each page
+- **PWA Manifest**: Web app manifest for mobile installation
+
+### Performance Features
+- **Code Splitting**: Lazy loading of route components
+- **Bundle Optimization**: Tree shaking and minification
+- **Image Optimization**: Responsive images and lazy loading
+- **Caching**: Efficient browser caching strategies
 
 ## 🌟 Current Status
 
-✅ Project structure setup  
-✅ Frontend with React + Vite  
-✅ Backend with Fastify  
-✅ Tailwind CSS styling  
-✅ Navigation and routing  
-🚧 Individual tools (in development)
+✅ **Complete Frontend Implementation**
+✅ **All 8 Developer Tools Functional**
+✅ **Responsive Design & Mobile Support**
+✅ **Dark Mode Implementation**
+✅ **SEO Optimization**
+✅ **Performance Optimization**
+✅ **PWA Ready**
 
-Made with ❤️ for developers
+## 📄 License
 
-## Expanding the ESLint configuration
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🙏 Acknowledgments
+
+- [React](https://reactjs.org/) - UI library
+- [Vite](https://vitejs.dev/) - Build tool
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+- [Heroicons](https://heroicons.com/) - Icon library
+
+---
+
+Made with ❤️ by the DevVault team

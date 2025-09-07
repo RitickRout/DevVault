@@ -1,0 +1,60 @@
+{
+  "name": "DevVault - Developer Toolkit",
+  "short_name": "DevVault",
+  "description": "Free online developer toolkit with 8 essential tools: JSON formatter, Regex tester, JWT decoder, Hash generator, API tester, Git commands, Color tools, and Markdown editor.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["developer", "tools", "utilities"],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "JSON Formatter",
+      "short_name": "JSONify",
+      "description": "Format and validate JSON data",
+      "url": "/jsonify",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "Regex Tester",
+      "short_name": "RegexLab",
+      "description": "Test regular expressions",
+      "url": "/regexlab",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "JWT Decoder",
+      "short_name": "TokenPeek",
+      "description": "Decode JWT tokens",
+      "url": "/tokenpeek",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "Hash Generator",
+      "short_name": "HashHub",
+      "description": "Generate hashes and UUIDs",
+      "url": "/hashhub",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    }
+  ]
+}

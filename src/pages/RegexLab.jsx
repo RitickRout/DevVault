@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MagnifyingGlassIcon, DocumentDuplicateIcon, ExclamationTriangleIcon, CheckIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import useStore from '../store/useStore'
+import SEO from '../components/SEO'
 
 const RegexLab = () => {
   const { tools, updateTool, addNotification } = useStore()
@@ -140,8 +141,15 @@ const RegexLab = () => {
   ]
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="mb-6">
+    <>
+      <SEO
+        title="Regex Tester & Pattern Matcher"
+        description="Free online regular expression tester with live highlighting, match details, and common pattern presets. Test regex patterns with real-time validation and detailed match information."
+        keywords="regex tester, regular expression tester, regex validator, pattern matcher, regex online, test regex, regex tool"
+        canonical="/regexlab"
+      />
+      <div className="h-full flex flex-col">
+        <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
           <MagnifyingGlassIcon className="w-8 h-8 mr-3 text-primary-600 dark:text-primary-400" />
           RegexLab
@@ -325,7 +333,8 @@ const RegexLab = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   )
 }
 

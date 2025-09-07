@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CodeBracketIcon, DocumentDuplicateIcon, ArrowPathIcon, CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import useStore from '../store/useStore'
 import { formatJson, validateJson, minifyJson } from '../utils/jsonUtils'
+import SEO from '../components/SEO'
 
 const JSONify = () => {
   const { tools, updateTool, addNotification } = useStore()
@@ -111,8 +112,15 @@ const JSONify = () => {
   }
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="mb-6">
+    <>
+      <SEO
+        title="JSON Formatter & Validator"
+        description="Free online JSON formatter, validator, and prettifier. Format, validate, and minify JSON data with real-time validation, syntax highlighting, and detailed statistics."
+        keywords="JSON formatter, JSON validator, JSON prettifier, JSON minifier, format JSON online, validate JSON, JSON syntax checker"
+        canonical="/jsonify"
+      />
+      <div className="h-full flex flex-col">
+        <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
           <CodeBracketIcon className="w-8 h-8 mr-3 text-primary-600 dark:text-primary-400" />
           JSONify
@@ -275,7 +283,8 @@ const JSONify = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   )
 }
 

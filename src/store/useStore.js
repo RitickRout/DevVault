@@ -12,7 +12,8 @@ const useStore = create((set, get) => ({
       output: '',
       indent: 2,
       isValid: null,
-      stats: null
+      stats: null,
+      viewMode: 'text' // 'text', 'visual', 'graph', 'split'
     },
     regexlab: {
       pattern: '',

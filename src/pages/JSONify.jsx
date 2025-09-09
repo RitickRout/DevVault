@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { CodeBracketIcon, DocumentDuplicateIcon, ArrowPathIcon, CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { CodeBracketIcon, DocumentDuplicateIcon, ArrowPathIcon, CheckIcon, ExclamationTriangleIcon, EyeIcon, DocumentTextIcon, Squares2X2Icon, ShareIcon } from '@heroicons/react/24/outline'
 import useStore from '../store/useStore'
 import { formatJson, validateJson, minifyJson } from '../utils/jsonUtils'
 import SEO from '../components/SEO'
+import JSONTreeViewer from '../components/JSONTreeViewer'
+import JSONGraphViewer from '../components/JSONGraphViewer'
 
 const JSONify = () => {
   const { tools, updateTool, addNotification } = useStore()
@@ -150,6 +152,58 @@ const JSONify = () => {
           </div>
 
           <div className="flex items-center space-x-2">
+            <label className="text-sm font-medium text-gray-700 dark:text-dark-300">
+              View:
+            </label>
+            <div className="flex bg-gray-100 dark:bg-dark-700 rounded-lg p-1">
+              <button
+                onClick={() => updateTool('jsonify', { viewMode: 'text' })}
+                className={`flex items-center px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                  jsonifyState.viewMode === 'text'
+                    ? 'bg-white dark:bg-dark-600 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <DocumentTextIcon className="w-4 h-4 mr-1" />
+                Text
+              </button>
+              <button
+                onClick={() => updateTool('jsonify', { viewMode: 'visual' })}
+                className={`flex items-center px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                  jsonifyState.viewMode === 'visual'
+                    ? 'bg-white dark:bg-dark-600 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <EyeIcon className="w-4 h-4 mr-1" />
+                Tree
+              </button>
+              <button
+                onClick={() => updateTool('jsonify', { viewMode: 'graph' })}
+                className={`flex items-center px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                  jsonifyState.viewMode === 'graph'
+                    ? 'bg-white dark:bg-dark-600 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <ShareIcon className="w-4 h-4 mr-1" />
+                Graph
+              </button>
+              <button
+                onClick={() => updateTool('jsonify', { viewMode: 'split' })}
+                className={`flex items-center px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                  jsonifyState.viewMode === 'split'
+                    ? 'bg-white dark:bg-dark-600 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <Squares2X2Icon className="w-4 h-4 mr-1" />
+                Split
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2">
             <button
               onClick={handleFormat}
               disabled={isFormatting || !jsonifyState.input.trim()}
@@ -177,6 +231,56 @@ const JSONify = () => {
             >
               Clear
             </button>
+
+            <button
+              onClick={() => {
+                const sampleData = {
+                  "squadName": "Super hero squad",
+                  "homeTown": "Metro City",
+                  "formed": 2016,
+                  "secretBase": "Super tower",
+                  "active": true,
+                  "members": [
+                    {
+                      "name": "Molecule Man",
+                      "age": 29,
+                      "secretIdentity": "Dan Jukes",
+                      "powers": [
+                        "Radiation resistance",
+                        "Turning tiny",
+                        "Radiation blast"
+                      ]
+                    },
+                    {
+                      "name": "Madame Uppercut",
+                      "age": 39,
+                      "secretIdentity": "Jane Wilson",
+                      "powers": [
+                        "Million tonne punch",
+                        "Damage resistance",
+                        "Superhuman reflexes"
+                      ]
+                    },
+                    {
+                      "name": "Eternal Flame",
+                      "age": 1000000,
+                      "secretIdentity": "Unknown",
+                      "powers": [
+                        "Immortality",
+                        "Heat Immunity",
+                        "Inferno",
+                        "Teleportation",
+                        "Interdimensional travel"
+                      ]
+                    }
+                  ]
+                }
+                updateTool('jsonify', { input: JSON.stringify(sampleData, null, 2) })
+              }}
+              className="flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors text-sm font-medium"
+            >
+              Load Sample
+            </button>
           </div>
 
           {/* Validation Status */}
@@ -202,7 +306,13 @@ const JSONify = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0">
+      <div className={`flex-1 gap-6 min-h-0 ${
+        jsonifyState.viewMode === 'split'
+          ? 'grid grid-cols-1 xl:grid-cols-3'
+          : jsonifyState.viewMode === 'graph' || jsonifyState.viewMode === 'visual'
+          ? 'grid grid-cols-1 lg:grid-cols-2'
+          : 'grid grid-cols-1 lg:grid-cols-2'
+      }`}>
         {/* Input Section */}
         <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 flex flex-col">
           <div className="p-4 border-b border-gray-200 dark:border-dark-700">
@@ -220,65 +330,103 @@ const JSONify = () => {
           </div>
         </div>
 
-        {/* Output Section */}
-        <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 flex flex-col">
-          <div className="p-4 border-b border-gray-200 dark:border-dark-700 flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Formatted JSON</h3>
-              <p className="text-sm text-gray-600 dark:text-dark-400">Formatted and validated output</p>
+        {/* Output Section - Text View */}
+        {(jsonifyState.viewMode === 'text' || jsonifyState.viewMode === 'split') && (
+          <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 flex flex-col">
+            <div className="p-4 border-b border-gray-200 dark:border-dark-700 flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Formatted JSON</h3>
+                <p className="text-sm text-gray-600 dark:text-dark-400">Formatted and validated output</p>
+              </div>
+              {jsonifyState.output && (
+                <button
+                  onClick={() => copyToClipboard(jsonifyState.output)}
+                  className="flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-200 dark:bg-dark-700 dark:hover:bg-dark-600 text-gray-700 dark:text-dark-300 rounded-lg transition-colors text-sm"
+                >
+                  <DocumentDuplicateIcon className="w-4 h-4 mr-1" />
+                  Copy
+                </button>
+              )}
             </div>
-            {jsonifyState.output && (
-              <button
-                onClick={() => copyToClipboard(jsonifyState.output)}
-                className="flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-200 dark:bg-dark-700 dark:hover:bg-dark-600 text-gray-700 dark:text-dark-300 rounded-lg transition-colors text-sm"
-              >
-                <DocumentDuplicateIcon className="w-4 h-4 mr-1" />
-                Copy
-              </button>
-            )}
+            <div className="flex-1 p-4">
+              <pre className="w-full h-full bg-gray-50 dark:bg-dark-900 border border-gray-200 dark:border-dark-600 rounded-lg p-3 font-mono text-sm text-gray-900 dark:text-white overflow-auto whitespace-pre-wrap" style={{ minHeight: '300px' }}>
+                {jsonifyState.output || 'Formatted JSON will appear here...'}
+              </pre>
+            </div>
           </div>
-          <div className="flex-1 p-4">
-            <pre className="w-full h-full bg-gray-50 dark:bg-dark-900 border border-gray-200 dark:border-dark-600 rounded-lg p-3 font-mono text-sm text-gray-900 dark:text-white overflow-auto whitespace-pre-wrap" style={{ minHeight: '300px' }}>
-              {jsonifyState.output || 'Formatted JSON will appear here...'}
-            </pre>
+        )}
+
+        {/* Visual Tree View */}
+        {(jsonifyState.viewMode === 'visual' || jsonifyState.viewMode === 'split') && (
+          <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 flex flex-col">
+            <div className="p-4 border-b border-gray-200 dark:border-dark-700">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Visual Tree</h3>
+                <p className="text-sm text-gray-600 dark:text-dark-400">Interactive JSON structure visualization</p>
+              </div>
+            </div>
+            <div className="flex-1 min-h-0">
+              <JSONTreeViewer
+                data={jsonifyState.input}
+                className="h-full"
+              />
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Graph View */}
+        {jsonifyState.viewMode === 'graph' && (
+          <div className="bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 flex flex-col">
+            <div className="p-4 border-b border-gray-200 dark:border-dark-700">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Graph Visualization</h3>
+                <p className="text-sm text-gray-600 dark:text-dark-400">Node-based JSON structure diagram</p>
+              </div>
+            </div>
+            <div className="flex-1 min-h-0">
+              <JSONGraphViewer
+                data={jsonifyState.input}
+                className="h-full"
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Statistics */}
       {jsonifyState.stats && (
-        <div className="mt-6 bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 p-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">JSON Statistics</h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+        <div className="mt-6 bg-white dark:bg-dark-800 rounded-xl border border-gray-200 dark:border-dark-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">JSON Statistics</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <div className="text-center p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
+              <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
                 {jsonifyState.stats.size}
               </div>
-              <div className="text-sm text-gray-600 dark:text-dark-400">Bytes</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-dark-400">Bytes</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+            <div className="text-center p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
+              <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
                 {jsonifyState.stats.keys}
               </div>
-              <div className="text-sm text-gray-600 dark:text-dark-400">Keys</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-dark-400">Keys</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="text-center p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                 {jsonifyState.stats.depth}
               </div>
-              <div className="text-sm text-gray-600 dark:text-dark-400">Depth</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-dark-400">Depth</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <div className="text-center p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
+              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
                 {jsonifyState.stats.arrayItems}
               </div>
-              <div className="text-sm text-gray-600 dark:text-dark-400">Array Items</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-dark-400">Array Items</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+            <div className="text-center p-4 bg-gray-50 dark:bg-dark-700 rounded-lg">
+              <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
                 {jsonifyState.stats.type}
               </div>
-              <div className="text-sm text-gray-600 dark:text-dark-400">Type</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-dark-400">Type</div>
             </div>
           </div>
         </div>
